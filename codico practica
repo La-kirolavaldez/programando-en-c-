@@ -1,0 +1,46 @@
+class CuentaBancaria
+{
+    public string NumeroCuenta { get; set; }
+    public decimal Saldo { get; private set; }
+    public Titular TitularCuenta { get; set; }
+
+    public CuentaBancaria(string numeroCuenta, Titular titular, decimal saldoInicial = 0)
+    {
+        NumeroCuenta = numeroCuenta;
+        TitularCuenta = titular;
+        Saldo = saldoInicial;
+    }
+
+    public void Depositar(decimal cantidad)
+    {
+        if (cantidad > 0)
+        {
+            Saldo += cantidad;
+            Console.WriteLine($"Depósito de {cantidad:C} realizado correctamente.");
+        }
+        else
+        {
+            Console.WriteLine("La cantidad a depositar debe ser positiva.");
+        }
+    }
+
+    public void Retirar(decimal cantidad)
+    {
+        if (cantidad > 0 && Saldo >= cantidad)
+        {
+            Saldo -= cantidad;
+            Console.WriteLine($"Retiro de {cantidad:C} realizado correctamente.");
+        }
+        else
+        {
+            Console.WriteLine("Cantidad no válida o saldo insuficiente.");
+        }
+    }
+
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Cuenta N°: {NumeroCuenta}");
+        Console.WriteLine($"Saldo actual: {Saldo:C}");
+        TitularCuenta.MostrarInfo();
+    }
+}
