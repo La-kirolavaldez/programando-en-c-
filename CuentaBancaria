@@ -1,0 +1,101 @@
+using System;
+
+class Titular
+{
+    // Atributos
+    public string Nombre { get; set; }
+    public string Apellido { get; set; }
+    public string Direccion { get; set; }
+    public string Telefono { get; set; }
+
+    // Constructor
+    public Titular(string nombre, string apellido, string direccion, string telefono)
+    {
+        Nombre = nombre;
+        Apellido = apellido;
+        Direccion = direccion;
+        Telefono = telefono;
+    }
+
+    // Método para mostrar información del titular
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Titular: {Nombre} {Apellido}");
+        Console.WriteLine($"Dirección: {Direccion}");
+        Console.WriteLine($"Teléfono: {Telefono}");
+    }
+}
+
+class CuentaBancaria
+{
+    // Atributos
+    public string NumeroCuenta { get; set; }
+    public decimal Saldo { get; private set; }
+    public Titular TitularCuenta { get; set; }
+
+    // Constructor
+    public CuentaBancaria(string numeroCuenta, Titular titular, decimal saldoInicial = 0)
+    {
+        NumeroCuenta = numeroCuenta;
+        TitularCuenta = titular;
+        Saldo = saldoInicial;
+    }
+
+    // Método para depositar dinero
+    public void Depositar(decimal cantidad)
+    {
+        if (cantidad > 0)
+        {
+            Saldo += cantidad;
+            Console.WriteLine($"Depósito de {cantidad:C} realizado correctamente.");
+        }
+        else
+        {
+            Console.WriteLine("La cantidad a depositar debe ser positiva.");
+        }
+    }
+
+    // Método para retirar dinero
+    public void Retirar(decimal cantidad)
+    {
+        if (cantidad > 0 && Saldo >= cantidad)
+        {
+            Saldo -= cantidad;
+            Console.WriteLine($"Retiro de {cantidad:C} realizado correctamente.");
+        }
+        else
+        {
+            Console.WriteLine("Cantidad no válida o saldo insuficiente.");
+        }
+    }
+
+    // Método para mostrar información de la cuenta
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Cuenta N°: {NumeroCuenta}");
+        Console.WriteLine($"Saldo actual: {Saldo:C}");
+        TitularCuenta.MostrarInfo();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creación de un titular
+        Titular titular = new Titular("Juan", "Pérez", "Calle Falsa 123", "809-123-4567");
+
+        // Creación de una cuenta bancaria asociada al titular
+        CuentaBancaria cuenta = new CuentaBancaria("1234567890", titular, 1000);
+
+        // Mostrar información de la cuenta y del titular
+        cuenta.MostrarInfo();
+
+        // Realizar operaciones
+        cuenta.Depositar(500);
+        cuenta.Retirar(300);
+
+        // Mostrar información actualizada
+        cuenta.MostrarInfo();
+    }
+}
