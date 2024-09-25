@@ -83,7 +83,7 @@ class Program
     static void Main(string[] args)
     {
         // Creación de un titular
-        Titular titular = new Titular("Juan", "Pérez", "Calle Falsa 123", "809-123-4567");
+        Titular titular = new Titular("victor ", "nuñez", "Calle Falsa 123", "809-123-4567");
 
         // Creación de una cuenta bancaria asociada al titular
         CuentaBancaria cuenta = new CuentaBancaria("1234567890", titular, 1000);
